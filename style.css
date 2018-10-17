@@ -1,0 +1,42 @@
+body{
+  display: flex;
+  justify-content: center;
+}
+section{
+  margin-top: 30px;
+  background-color:yellow;
+  padding: 3%;
+  width: 30%;
+  min-width: 20em;
+}
+
+.labcell{
+  width: 30%;
+  max-width: 5em;
+  float:left;
+}
+
+.cell{
+  background-color:lightblue;
+  margin: .4em 0;
+  padding: .5em;
+}
+
+input[type="text"]{
+  width: 70%;
+}
+
+#radio{
+  text-align: center;
+}
+
+#user, #book{
+  display: flex;
+  align-items: center;
+}
+
+#send{
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
