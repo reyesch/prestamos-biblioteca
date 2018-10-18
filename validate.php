@@ -1,14 +1,13 @@
 <?php
 
 session_start();
-
 date_default_timezone_set('Europe/Madrid');
 
 //form request
 if(isset($_SESSION["form"])){
-  $form["radio"] = $_REQUEST["radio"];
-  $form["user"] = $_REQUEST["user"];
-  $form["book"] = $_REQUEST["book"];
+  $form["radio"] = $_POST["radio"];
+  $form["user"] = $_POST["user"];
+  $form["book"] = $_POST["book"];
   $form["ip"] = get_client_ip();
   $form["date"] = date("YmdHis");
 }else
@@ -26,21 +25,14 @@ if(isset($_SESSION["form"])){
   //Get the client ip
   function get_client_ip(){
     $ip = '';
-    if($_SERVER['HTTP_CLIENT_IP'])
-      $ip = $_SERVER['HTTP_CLIENT_IP'];
-    else if($_SERVER['HTTP_X_FORWARDED_FOR'])
-      $ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
-    else if($_SERVER['HTTP_X_FORWARDED'])
-      $ip = $_SERVER['HTTP_X_FORWARDED'];
-    else if($_SERVER['HTTP_FORWARDED_FOR'])
-      $ip = $_SERVER['HTTP_FORWARDED_FOR'];
-    else if($_SERVER['HTTP_FORWARDED'])
-      $ip = $_SERVER['HTTP_FORWARDED'];
-    else if($_SERVER['REMOTE_ADDR'])
-      $ip = $_SERVER['REMOTE_ADDR'];
-    else
-      $ip = 'UNKNOWN';
-
+    echo getenv('HTTP_CLIENT_IP') ."";
+    if(getenv('HTTP_CLIENT_IP')){
+      $ip = getenv('HTTP_CLIENT_IP');
+    }else{
+      $ip="mal";
+      $errors[]="<p> No ha podido registrarse el libro.<p>";
+      Header("Location: prueba.php");
+    }
     return $ip;
   }
 

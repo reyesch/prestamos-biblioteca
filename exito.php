@@ -2,6 +2,7 @@
 <html lang="es">
 <?php
 
+//modificar
 session_start();
 if(isset($_SESSION["form"])){
   $form = $_SESSION["form"];

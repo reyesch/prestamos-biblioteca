@@ -1,5 +1,5 @@
 <?php
-
+//TODO quitar var sesion
 session_start();
 
 if(!isset($_SESSION["form"])){
@@ -26,7 +26,10 @@ if(isset($_SESSION["errors"])){
     </head>
   <body>
     <section>
-      <form method="get" action="validate.php">
+
+<!-- TODO Poner arriba "biblioteca de"-->
+      <h1>BIBLIOTECA DE</h1>
+      <form method="post" action="validate.php">
         <div class="cell" id="radio">
           <input type="radio" name="radio" value="L"/>
           <label>Préstamo</label>
@@ -41,6 +44,7 @@ if(isset($_SESSION["errors"])){
           <label class="labcell">Libro</label>
           <input type="text" name="book" required/>
         </div>
+        <input type="hidden" value="generic">
         <div class="cell">
           <button id ="send" type="submit">Enviar</button>
         </div>
