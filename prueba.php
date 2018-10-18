@@ -9,6 +9,13 @@ if(!isset($_SESSION["form"])){
   $_SESSION["form"] = $form;
 }else
 $form = $_SESSION["form"];
+
+//Mesage
+if(isset($_SESSION["errors"])){
+  foreach ($_SESSION["errors"] as $msg) {
+    echo $msg;
+  }
+}
 ?>
 
 <!DOCTYPE html>

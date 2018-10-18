@@ -2,26 +2,27 @@
 
 session_start();
 
-//
 date_default_timezone_set('Europe/Madrid');
 
 //form request
-
-//inicio sesion
 if(isset($_SESSION["form"])){
   $form["radio"] = $_REQUEST["radio"];
   $form["user"] = $_REQUEST["user"];
   $form["book"] = $_REQUEST["book"];
-}else{
+  $form["ip"] = get_client_ip();
+  $form["date"] = date("YmdHis");
+}else
   Header("Location: prueba.php");
+  $_SESSION["form"]=$form;
+
   $errors = validateForm($form);
-  if(count($errores)!==0){
+  if(count($errors)!==0){
     $_SESSION["errors"]=$errors;
     Header("Location: prueba.php");
   }else{
     Header("Location: exito.php");
   }
-}
+
   //Get the client ip
   function get_client_ip(){
     $ip = '';
@@ -43,6 +44,7 @@ if(isset($_SESSION["form"])){
     return $ip;
   }
 
+//Validate
 function validateForm($form){
   if($form["radio"]==""){
     $errors[]="<p> No se ha seleccionado la acción que quiere realizar.<p>";
@@ -54,10 +56,7 @@ function validateForm($form){
     $errors[]="<p> No se ha introducido el ejemplar.<p>";
   }
 
+  return $errors;
+
 }
-echo get_client_ip();
-echo $form["user"];
-echo $form["book"];
-echo $form["radio"];
-echo date("YmdHi");
  ?>
