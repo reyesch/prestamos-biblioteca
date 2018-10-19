@@ -2,18 +2,11 @@
 //TODO quitar var sesion
 session_start();
 
-if(!isset($_SESSION["form"])){
-  $form['radio']="";
-  $form['user']="";
-  $form['book']="";
-  $_SESSION["form"] = $form;
-}else
-$form = $_SESSION["form"];
-
 //Mesage
 if(isset($_SESSION["errors"])){
   foreach ($_SESSION["errors"] as $msg) {
     echo $msg;
+    unset($_SESSION["errors"]);
   }
 }
 ?>

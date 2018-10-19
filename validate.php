@@ -4,22 +4,18 @@ session_start();
 date_default_timezone_set('Europe/Madrid');
 
 //form request
-if(isset($_SESSION["form"])){
   $form["radio"] = $_POST["radio"];
   $form["user"] = $_POST["user"];
   $form["book"] = $_POST["book"];
   $form["ip"] = get_client_ip();
   $form["date"] = date("YmdHis");
-}else
-  Header("Location: prueba.php");
-  $_SESSION["form"]=$form;
-
   $errors = validateForm($form);
   if(count($errors)!==0){
     $_SESSION["errors"]=$errors;
     Header("Location: prueba.php");
   }else{
-    Header("Location: exito.php");
+    $_SESSION["form"]=$form;
+    Header("Location: conexion.php");
   }
 
   //Get the client ip
@@ -29,7 +25,7 @@ if(isset($_SESSION["form"])){
     if(getenv('HTTP_CLIENT_IP')){
       $ip = getenv('HTTP_CLIENT_IP');
     }else{
-      $ip="mal";
+      $ip="IP SERVER";
       $errors[]="<p> No ha podido registrarse el libro.<p>";
       Header("Location: prueba.php");
     }

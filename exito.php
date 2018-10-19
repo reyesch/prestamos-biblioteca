@@ -4,19 +4,19 @@
 
 //modificar
 session_start();
-if(isset($_SESSION["form"])){
+
   $form = $_SESSION["form"];
   unset($_SESSION["form"]);
   unset($_SESSION["errors"]);
-}else{
-  Header("Location:prueba.php");
-}
 
 echo $form["user"];
 echo $form["book"];
 echo $form["radio"];
 echo $form["ip"];
 echo $form["date"];
+
+
+
 ?>
 
 <button id="return">ATRÁS</button>
