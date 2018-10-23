@@ -5,22 +5,17 @@ $sql = '';
 //$form='';
 session_start();
 $form= $_SESSION["form"];
-session_destroy();
-# $username = "username";
-# $password = "password";
-# $dbname = "myDBPDO";
 $id = $form["date"].$form["user"].$form["book"];
 $id = md5($id);
 $bib='generic';
-$form["user"] = strtoupper($form["user"]);
+$form["user"];
+csvExport($id,$form["radio"],$form["ip"],$form["date"],$bib,$form["user"],$form["book"]);
 
 try {
     $conn = new PDO($dbname);
-    // set the PDO error mode to exception
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     $sql = "INSERT INTO prestamosydevoluciones (idform, tipotransaccion, iptransaccion, fechayhora, biblioteca, usuario, libro)
     VALUES (:idform,:tipotransaccion,:iptransaccion,:fechayhora,:biblioteca,:usuario,:libro)";
-    // use exec() because no results are returned
     $conn = $conn->prepare($sql);
     $conn->bindParam(":idform",$id);
     $conn->bindParam(":tipotransaccion",$form["radio"],PDO::PARAM_STR);
@@ -30,7 +25,7 @@ try {
     $conn->bindParam(":usuario",$form["user"],PDO::PARAM_STR);
     $conn->bindParam(":libro",$form["book"],PDO::PARAM_STR);
     $conn->execute();
-    echo "New record created successfully";
+    Header("Location: exito.php");
     }
 catch(PDOException $e)
     {
@@ -39,5 +34,16 @@ catch(PDOException $e)
 
 $conn = null;
 
+function csvExport($id,$radio,$ip,$date,$bib,$user,$book){
+  $csvFile = fopen('prestamosydevoluciones.csv','a+');
+  $columns = ["idform","tipotransaccion", "iptransaccion", "fechayhora", "biblioteca", "usuario", "libro"];
+  $row = [$id,$radio,$ip,$date,$bib,$user,$book];
+  if($csvFile){
+      fputs($csvFile, implode($row, ',').PHP_EOL);
+      fclose($csvFile);
+  }else{
+    echo "El archivo no existe o no se pudo crear";
+  }
+}
 
 ?>

@@ -1,8 +1,6 @@
 <?php
-
 session_start();
-
-
+unset($_SESSION["form"]);
 date_default_timezone_set('Europe/Madrid');
 
 ?>
@@ -20,7 +18,7 @@ date_default_timezone_set('Europe/Madrid');
         foreach ($_SESSION["errors"] as $msg) {
           echo $msg;
       }?>
-      <button onlick="close()">Cerrar</button>
+      <button onclick="close()">Cerrar</button>
     </div>
   <?php } ?>
     <section id="form">
@@ -40,6 +38,7 @@ date_default_timezone_set('Europe/Madrid');
           <label class="labCell">Libro</label>
           <input type="text" id="bookInput" name="book" required/>
         </div>
+        <!--TODO BIB NOMBRES¿?-->
         <input type="hidden" value="generic">
         <div class="cell">
           <button id ="send" type="submit">Enviar</button>
@@ -47,22 +46,15 @@ date_default_timezone_set('Europe/Madrid');
       </form>
     </section>
     <section id="date">
-      <?php echo "DEVOLVER EL DÍA ".date('d-m-Y', strtotime("+21 days"));?>
+      <?php echo "DEVOLVER EN 21 DÍAS </br><h2>".date('d-m-Y', strtotime("+21 days"))."</h2>";?>
     </section>
 
     <script type="text/javascript">
-    
-    function close(){
-      document.getElementById("errors").style.display = "none";
-    }
     function inputColor(){
-      document.getElementById("bookInput").style.color = "#fff";
       if(document.getElementById("radioL").checked){
-        document.getElementById("userInput").style.boxShadow = "0 0 0.5em #990000";
-        document.getElementById("bookInput").style.backgroundColor = "#990000";
+        document.getElementById("form").style.backgroundColor = "#d98880";
       }else{
-        document.getElementById("userInput").style.boxShadow = "0 0 0.5em green";
-        document.getElementById("bookInput").style.backgroundColor = "green";
+        document.getElementById("form").style.backgroundColor = "#52be80";
       }
     }
     </script>

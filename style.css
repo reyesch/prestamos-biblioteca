@@ -1,8 +1,8 @@
 body{
   display: flex;
   flex-direction: column;
-  justify-content: center; 
-  align-items: center; 
+  justify-content: center;
+  align-items: center;
 	font-family: Verdana, Arial, Helvetica, sans-serif;
 	font-style: normal;
 	font-weight: normal;
@@ -17,9 +17,6 @@ section{
   border-radius: 0.15em;
 }
 
-h1{
-  color:#990000;
-}
 
 .labCell{
   text-align: left;
@@ -29,9 +26,9 @@ h1{
 }
 
 .cell{
-  /*background-color:lightblue;*/
   margin: .4em 0;
   padding: .5em;
+
 }
 
 input[type="text"]{
@@ -75,5 +72,6 @@ input[type="text"]{
   text-align:center;
   background-color: rgba(53,53,53,1);
   color:white;
-  
+  display:"none";
+
 }
