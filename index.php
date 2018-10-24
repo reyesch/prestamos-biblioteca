@@ -9,6 +9,7 @@ date_default_timezone_set('Europe/Madrid');
 <html lang="es">
     <head>
       <meta http-equiv="content-type" content="text/html" charset="utf-8">
+      <script src="validate.js" type="text/javascript"></script>
       <link rel="stylesheet" href="style.css">
     </head>
   <body>
@@ -23,9 +24,9 @@ date_default_timezone_set('Europe/Madrid');
   <?php } ?>
     <section id="form">
       <h1>BIBLIOTECA DE</h1>
-      <form method="post" action="validate.php">
+      <form method="post" onsubmit="return validateForm()" action="validate.php">
         <div class="cell" id="radio">
-          <input type="radio" name="radio" id="radioL" onclick="inputColor()" value="L"/>
+          <input type="radio" name="radio" id="radioL" onclick="inputColor()" value="L" required/>
           <label>Préstamo</label>
           <input type="radio" name="radio" id="radioR" onclick="inputColor()" value="R" />
           <label>Devolución</label>
@@ -38,7 +39,6 @@ date_default_timezone_set('Europe/Madrid');
           <label class="labCell">Libro</label>
           <input type="text" id="bookInput" name="book" required/>
         </div>
-        <!--TODO BIB NOMBRES¿?-->
         <input type="hidden" value="generic">
         <div class="cell">
           <button id ="send" type="submit">Enviar</button>

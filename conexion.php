@@ -37,7 +37,7 @@ $conn = null;
 function csvExport($id,$radio,$ip,$date,$bib,$user,$book){
   $csvFile = fopen('prestamosydevoluciones.csv','a+');
   $columns = ["idform","tipotransaccion", "iptransaccion", "fechayhora", "biblioteca", "usuario", "libro"];
-  $row = [$id,$radio,$ip,$date,$bib,$user,$book];
+  $row = array($id,$radio,$ip,$date,$bib,$user,$book);
   if($csvFile){
       fputs($csvFile, implode($row, ',').PHP_EOL);
       fclose($csvFile);

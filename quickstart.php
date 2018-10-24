@@ -58,14 +58,19 @@ function getClient()
 
 // Get the API client and construct the service object.
 $client = getClient();
-$service = new Google_Service_Sheets($client);
+$service = new Google_Service_Sheets_ValueRange($client);
 
 // Prints the names and majors of students in a sample spreadsheet:
 // https://docs.google.com/spreadsheets/d/1BxiMVs0XRA5nFMdKvBdBZjgmUUqptlbs74OgvE2upms/edit
-$spreadsheetId = '1BxiMVs0XRA5nFMdKvBdBZjgmUUqptlbs74OgvE2upms';
-$range = 'Class Data!A2:E';
-$response = $service->spreadsheets_values->get($spreadsheetId, $range);
-$values = $response->getValues();
+// https://docs.google.com/spreadsheets/d/1LXE2CeWRe9zKIy8FXD6kRvVmiLpIu2vQESBVN1gVRRo/edit
+$spreadsheetId = '1LXE2CeWRe9zKIy8FXD6kRvVmiLpIu2vQESBVN1gVRRo';
+//range = 'Class Data!A2:E';
+$resource = array("majorDimension","ROWS","values": [["patata"]]
+)
+$optionalArgs = {valueInputOption: "USER_ENTERED"};
+$range = 'A2:E';
+$response = $service->spreadsheets_values->append($resource, $spreadsheetId, $range, $optionalArgs);
+//$values = $response->getValues();
 
 if (empty($values)) {
     print "No data found.\n";

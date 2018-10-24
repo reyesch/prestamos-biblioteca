@@ -8,6 +8,7 @@ date_default_timezone_set('Europe/Madrid');
   $form["book"] = $_POST["book"];
   $form["ip"] = get_client_ip();
   $form["date"] = date("YmdHis");
+  $errors = array();
   $errors = validateForm($form);
   if(count($errors)!==0){
     $_SESSION["errors"]=$errors;
@@ -32,38 +33,34 @@ date_default_timezone_set('Europe/Madrid');
   }
 
 //Validate
+
 function validateForm($form){
 
-  $errors = [];
+  $errors = array();
 
   if($form["radio"]==""){
-    $errors[]="<p> No se ha seleccionado la acción que quiere realizar.<p>";
+    array_push($errors,"<p> No ha seleccionado la acción que quiere realizar.<p>");
   }
   if($form["user"]==""){
-    $errors[]="<p> No se ha introducido el usuario.<p>";
+    array_push($errors,"<p> No se ha introducido el usuario.<p>");
   }
   if($form["book"]==""){
-    $errors[]="<p> No se ha introducido el ejemplar.<p>";
+    array_push($errors,"<p> No se ha introducido el ejemplar.<p>");
   }
-  /*if (!filter_var($form["ip"], FILTER_VALIDATE_IP)) {
-    $errors[]="La dirección IP no es válida.";
-  }*/
+/*  if (!filter_var($form["ip"], FILTER_VALIDATE_IP)) {
+    array_push($errors,"<p>La dirección IP no es válida.</p>");
+  } */
   if($form["radio"]!=="R" && $form["radio"]!=="L"){
-    $errors[]="<p> La opción no es válida.<p>";
+    array_push($errors,"<p> La opción no es válida.<p>");
   }
-  if($form["radio"]!=="R" && $form["radio"]!=="L"){
-    $errors[]="<p> La opción no es válida.<p>";
-  }
-
   if(!preg_match("/^[0-9]{9}$/", $form["book"])){
-    $errors[]="<p> El libro no es correcto<p>";
+    array_push($errors,"<p> El libro no es correcto<p>");
   }
-
 	$letter = substr($form["user"], -1);
 	$number = substr($form["user"], 0, -1);
 	if ( substr("TRWAGMYFPDXBNJZSQVHLCKE", $number%23, 1) == $letter && strlen($letter) == 1 && strlen ($number) == 8 ){
 	}else{
-		$errors[]="<p> El usuario no es correcto<p>";
+    array_push($errors,"<p> El usuario no es correcto<p>");
 	}
   return $errors;
 }
