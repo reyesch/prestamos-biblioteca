@@ -13,15 +13,7 @@ date_default_timezone_set('Europe/Madrid');
       <link rel="stylesheet" href="style.css">
     </head>
   <body>
-    <?php if(isset($_SESSION["errors"])){ ?>
-    <div id="errors">
-      <?php
-        foreach ($_SESSION["errors"] as $msg) {
-          echo $msg;
-      }?>
-      <button onclick="close()">Cerrar</button>
-    </div>
-  <?php } ?>
+    
     <section id="form">
       <h1>BIBLIOTECA DE</h1>
       <form method="post" onsubmit="return validateForm()" action="validate.php">
@@ -39,7 +31,7 @@ date_default_timezone_set('Europe/Madrid');
           <label class="labCell">Libro</label>
           <input type="text" id="bookInput" name="book" required/>
         </div>
-        <input type="hidden" value="generic">
+        <input type="hidden" name="bib" value="generic">
         <div class="cell">
           <button id ="send" type="submit">Enviar</button>
         </div>
@@ -56,7 +48,13 @@ date_default_timezone_set('Europe/Madrid');
       }else{
         document.getElementById("form").style.backgroundColor = "#52be80";
       }
-    }
+    }    
+    <?php if(isset($_SESSION["errors"])){ ?>
+        alert("<?php
+          foreach ($_SESSION["errors"] as $msg) {
+          echo $msg.'\n';
+        }?>");
+    <?php }; ?>
     </script>
     <?php unset($_SESSION["errors"]);?>
   </body>
