@@ -1,10 +1,14 @@
+//TODO alert validaciones
+
 function validateForm(){
   var a = '';
   var userError = userValidation();
   var bookError = bookValidation();
   a = (userError.length==0)&&(bookError.length==0);
   if(userError.length!==0||bookError.length!==0){
-    alert(userError + "\n" + bookError);
+    //alert(userError + "\n" + bookError);
+    var alert = document.getElementById("alert").innerHTML += userError + "\n" + bookError;
+    alert.style.display = "inline";
   }
   return a;
 }

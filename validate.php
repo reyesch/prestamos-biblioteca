@@ -9,6 +9,8 @@ date_default_timezone_set('Europe/Madrid');
   $form["book"] = $_POST["book"];
   $form["ip"] = get_client_ip();
   $form["date"] = date("YmdHis");
+  //TODO fecha bib
+  $form["date2"] = date("d-m-Y H:i:s");
   $errors = array();
   $errors = validateForm($form);
   if(count($errors)!==0){

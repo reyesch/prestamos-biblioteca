@@ -1,6 +1,8 @@
 <?php
 session_start();
-unset($_SESSION["form"]);
+if(isset($_SESSION["form"])){
+  $form = $_SESSION["form"];
+}
 date_default_timezone_set('Europe/Madrid');
 
 ?>
@@ -9,10 +11,43 @@ date_default_timezone_set('Europe/Madrid');
 <html lang="es">
     <head>
       <meta http-equiv="content-type" content="text/html" charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
       <script src="validate.js" type="text/javascript"></script>
       <link rel="stylesheet" href="style.css">
     </head>
   <body>
+    
+    <!--TODO MENSAJES EMERGENTES-->
+    <?php if(isset($_SESSION["errors"])){ ?>
+    <div class="alert warning">
+      <span class="closebtn">&times;</span>  
+      <?php
+            foreach ($_SESSION["errors"] as $msg) {
+            echo $msg;
+          } ?>
+    </div>
+        <?php  }; ?>
+    <?php if(isset($_SESSION["form"])){ ?>
+    <div class="alert">
+      <span class="closebtn">&times;</span> 
+      <h1>Préstamo realizado correctamente.</h1> 
+      <?php
+       echo "USUARIO: ".$form["user"]."</br></br>";
+       echo "LIBRO: ".$form["book"]."</br></br>";
+       echo "SERVICIO: ".$form["radio"]."</br></br>";
+       echo "FECHA: ".$form["date2"]."";
+       ?>
+    </div>
+        <?php  };
+        unset($_SESSION["form"]);
+        $form = '';
+         ?>
+    <div class="alert warning" id="alert">
+        <span class="closebtn">&times;</span>  
+        </div>
+      </div>
+    <!---->
+    
     
     <section id="form">
       <h1>BIBLIOTECA DE</h1>
@@ -48,13 +83,17 @@ date_default_timezone_set('Europe/Madrid');
       }else{
         document.getElementById("form").style.backgroundColor = "#52be80";
       }
-    }    
-    <?php if(isset($_SESSION["errors"])){ ?>
-        alert("<?php
-          foreach ($_SESSION["errors"] as $msg) {
-          echo $msg.'\n';
-        }?>");
-    <?php }; ?>
+    }
+    //TODO NUEVO SCRIPT    
+    var close = document.getElementsByClassName("closebtn");
+    var i;
+    for (i = 0; i < close.length; i++) {
+        close[i].onclick = function(){
+            var div = this.parentElement;
+            div.style.opacity = "0";
+            setTimeout(function(){ div.style.display = "none"; }, 600);
+        }
+    }
     </script>
     <?php unset($_SESSION["errors"]);?>
   </body>

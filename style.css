@@ -1,3 +1,5 @@
+/*TODO css alert*/
+
 body{
   display: flex;
   flex-direction: column;
@@ -29,6 +31,37 @@ section{
   margin: .4em 0;
   padding: .5em;
 
+}
+
+.alert {
+    position: absolute;
+    top:55px;
+    margin-top: 2em;
+    padding: 2em;
+    background-color: #CFB4C6;
+    //color: white;
+    opacity: 1;
+    transition: opacity 0.6s;
+    border: 1px solid black;
+    border-radius: 0.15em;
+}
+.alert.warning {background-color: #A13B3B;
+color:white}
+#alert {display:none}
+
+.closebtn {
+    margin-left: 15px;
+    color: white;
+    font-weight: bold;
+    float: right;
+    font-size: 22px;
+    line-height: 20px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.closebtn:hover {
+    color: black;
 }
 
 input[type="text"]{
@@ -63,15 +96,4 @@ input[type="text"]{
   display: block;
   margin-left: auto;
   margin-right: auto;
-}
-
-#errors{
-  position: absolute;
-  width:20%;
-  padding:2em;
-  text-align:center;
-  background-color: rgba(53,53,53,1);
-  color:white;
-  display:"none";
-
 }
